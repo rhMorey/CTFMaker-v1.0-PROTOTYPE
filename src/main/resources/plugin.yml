@@ -1,0 +1,4 @@
+name: CTFMaker
+version: '${project.version}'
+main: moreyctf.mcctf.Main
+api-version: 1.18
