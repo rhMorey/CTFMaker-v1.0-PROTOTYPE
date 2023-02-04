@@ -2,3 +2,21 @@ name: CTFMaker
 version: '${project.version}'
 main: moreyctf.mcctf.Main
 api-version: 1.18
+
+commands:
+  startg:
+    description: Start the game
+    permission: ctf.startg
+    permission-message: §c§l(!) §cYou don't have permission to use this command.
+  setpurpleflag:
+    description: Set the purple flag
+    permission: ctf.setpurpleflag
+    permission-message: §c§l(!) §cYou don't have permission to use this command.
+  setyellowflag:
+    description: Set the yellow flag
+    permission: ctf.setyellowflag
+    permission-message: §c§l(!) §cYou don't have permission to use this command.
+  tcreate:
+    description: Setup the teams
+    permission: ctf.tcreate
+    permission-message: §c§l(!) §cYou don't have permission to use this command.
