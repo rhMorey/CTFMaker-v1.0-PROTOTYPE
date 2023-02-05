@@ -147,6 +147,7 @@ public class CaptureEvents implements Listener {
                 }
                     player.sendMessage("§eVous avez amené le drapeau à votre base !");
                 //remettre le drapeau à sa place ducoup
+                // quand le joueur meurt, le drapeau est drop par terre
                     player.removePotionEffect(PotionEffectType.GLOWING);
                     flagCaptured = false;
                 }
