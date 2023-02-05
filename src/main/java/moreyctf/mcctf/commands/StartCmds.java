@@ -16,20 +16,20 @@ public class StartCmds implements CommandExecutor {
             Player player = (Player) sender;
             player.sendMessage("debug");
             if(TeamConfigCmds.purple.getEntries().contains(player.getName())) {
-                if (Main.purple == null) {
+                if (Main.purpleloc == null) {
                     player.sendMessage(Main.prefix + "§cLa position de la drapeau de l'équipe §5purple §cn'a pas été définie.");
                     return false;
                 } else {
-                    player.teleport(Main.purple);
+                    player.teleport(Main.purpleloc);
                     player.sendMessage(Main.prefix + "§5Vous avez été téléporté au spawn de l'équipe §5purple§5.");
                 }
             }
             if(TeamConfigCmds.yellow.getEntries().contains(player.getName())) {
-                if (Main.yellow == null) {
+                if (Main.yellowloc == null) {
                     player.sendMessage(Main.prefix + "§cLa position de la drapeau de l'équipe §eyellow §cn'a pas été définie.");
                     return false;
                 } else {
-                    player.teleport(Main.yellow);
+                    player.teleport(Main.yellowloc);
                     player.sendMessage(Main.prefix + "§eVous avez été téléporté au spawn de l'équipe §eyellow§e.");
                 }
             }

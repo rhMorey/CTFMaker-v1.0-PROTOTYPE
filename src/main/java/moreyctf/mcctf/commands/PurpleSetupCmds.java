@@ -1,6 +1,8 @@
 package moreyctf.mcctf.commands;
 
 import moreyctf.mcctf.Main;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,7 +17,10 @@ public class PurpleSetupCmds implements CommandExecutor {
         if(s.equalsIgnoreCase("setpurpleflag")) {
             Player player = (Player) sender;
             player.sendMessage(Main.prefix + "§aLa position de la drapeau de l'équipe §5purple §aa été définie.");
-            Main.purple = player.getLocation();
+            Location playerloc = player.getLocation();
+            playerloc.getBlock().setType(Material.PURPLE_BANNER);
+            playerloc.add(0, -1, 0).getBlock().setType(Material.PURPLE_CONCRETE);
+            Main.purpleloc = player.getLocation();
         }
         return false;
     }
