@@ -10,12 +10,16 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.awt.*;
+
+import static moreyctf.mcctf.Main.purpleloc;
+import static moreyctf.mcctf.Main.yellowloc;
 
 public class CaptureEvents implements Listener {
 
@@ -100,17 +104,18 @@ public class CaptureEvents implements Listener {
                 for (Player onlinePlayer : Bukkit.getServer().getOnlinePlayers()) {
                     if (TeamConfigCmds.yellow.getEntries().contains(onlinePlayer.getName())) {
                         Bukkit.getScheduler().runTaskLater(Main.plugin, () -> {
-                            onlinePlayer.teleport(Main.yellowloc);
+                            onlinePlayer.teleport(yellowloc);
                         }, 100L);
                     }
                     if (TeamConfigCmds.purple.getEntries().contains(onlinePlayer.getName())) {
                         Bukkit.getScheduler().runTaskLater(Main.plugin, () -> {
-                            onlinePlayer.teleport(Main.purpleloc);
+                            onlinePlayer.teleport(purpleloc);
                         }, 100L);
                     }
                 }
                     player.sendMessage("§5Vous avez amené le drapeau à votre base !");
                     player.removePotionEffect(PotionEffectType.GLOWING);
+                    yellowloc.getBlock().setType(Material.YELLOW_BANNER);
                     flagCaptured = false;
                 }
             }
@@ -136,21 +141,38 @@ public class CaptureEvents implements Listener {
                 for (Player onlinePlayer : Bukkit.getServer().getOnlinePlayers()) {
                     if (TeamConfigCmds.yellow.getEntries().contains(onlinePlayer.getName())) {
                         Bukkit.getScheduler().runTaskLater(Main.plugin, () -> {
-                            onlinePlayer.teleport(Main.yellowloc);
+                            onlinePlayer.teleport(yellowloc);
                         }, 100L);
                     }
                     if (TeamConfigCmds.purple.getEntries().contains(onlinePlayer.getName())) {
                         Bukkit.getScheduler().runTaskLater(Main.plugin, () -> {
-                            onlinePlayer.teleport(Main.purpleloc);
+                            onlinePlayer.teleport(purpleloc);
                         }, 100L);
                     }
                 }
                     player.sendMessage("§eVous avez amené le drapeau à votre base !");
-                //remettre le drapeau à sa place ducoup
                 // quand le joueur meurt, le drapeau est drop par terre
                     player.removePotionEffect(PotionEffectType.GLOWING);
+                    purpleloc.getBlock().setType(Material.PURPLE_BANNER);
                     flagCaptured = false;
                 }
+        }
+    }
+
+    @EventHandler
+    public void PlayerDied(PlayerDeathEvent event) {
+        Player player = event.getPlayer();
+        if (player.hasPotionEffect(PotionEffectType.GLOWING)) {
+            player.removePotionEffect(PotionEffectType.GLOWING);
+            player.sendMessage("§cVous avez perdu le drapeau.");
+            if (TeamConfigCmds.purple.getEntries().contains(player.getName())) {
+                yellowloc.getBlock().setType(Material.YELLOW_BANNER);
+            }
+            if (TeamConfigCmds.yellow.getEntries().contains(player.getName())) {
+                purpleloc.getBlock().setType(Material.PURPLE_BANNER);
+            }
+            flagCaptured = false;
+            Bukkit.broadcastMessage("§a" + player.getName() + " est mort, le drapeau a été reposé.");
         }
     }
 }
