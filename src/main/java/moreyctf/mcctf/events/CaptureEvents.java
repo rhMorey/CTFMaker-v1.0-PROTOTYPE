@@ -151,7 +151,7 @@ public class CaptureEvents implements Listener {
                     }
                 }
                     player.sendMessage("§eVous avez amené le drapeau à votre base !");
-                // quand le joueur meurt, le drapeau est drop par terre
+                // quand le joueur meurt, le drapeau est drop par terre pendant 30 secondes, si personne le récupère, il est remis à sa place
                     player.removePotionEffect(PotionEffectType.GLOWING);
                     purpleloc.getBlock().setType(Material.PURPLE_BANNER);
                     flagCaptured = false;
