@@ -20,3 +20,7 @@ commands:
     description: Setup the teams
     permission: ctf.tcreate
     permission-message: §c§l(!) §cYou don't have permission to use this command.
+  ctf:
+    description: CTFMaker config commands
+    permission: ctf.ctf
+    permission-message: §c§l(!) §cYou don't have permission to use this command.

@@ -90,6 +90,10 @@ public class CaptureEvents implements Listener {
         if (playerloc.add(0, -1, 0).getBlock().getType().equals(Material.PURPLE_CONCRETE) && TeamConfigCmds.purple.getEntries().contains(event.getPlayer().getName()) && flagCaptured) {
             Player player = event.getPlayer();
             if (player.hasPotionEffect(PotionEffectType.GLOWING)) {
+                player.sendMessage("§5Vous avez amené le drapeau à votre base !");
+                yellowloc.getBlock().setType(Material.YELLOW_BANNER);
+                flagCaptured = false;
+                player.removePotionEffect(PotionEffectType.GLOWING);
                 Bukkit.broadcastMessage("§7*------------------------*");
                 Bukkit.broadcastMessage(" ");
                 Bukkit.broadcastMessage("§5" + player.getName() + " §6a capturé le drapeau !");
@@ -97,7 +101,7 @@ public class CaptureEvents implements Listener {
                 Bukkit.broadcastMessage("§7*------------------------*");
                 pScore++;
                 for (Player onlinep : Bukkit.getOnlinePlayers()) {
-                    onlinep.sendTitle("§e" + yScore + " §7| §5" + pScore, "§e" + player.getName() + " §7a marqué un point", 0, 100, 30);
+                    onlinep.sendTitle("§e" + yScore + " §7| §5" + pScore, "§5" + player.getName() + " §7a marqué un point", 0, 100, 30);
                     onlinep.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 1));
                     onlinep.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 100));
                 }
@@ -113,10 +117,6 @@ public class CaptureEvents implements Listener {
                         }, 100L);
                     }
                 }
-                    player.sendMessage("§5Vous avez amené le drapeau à votre base !");
-                    player.removePotionEffect(PotionEffectType.GLOWING);
-                    yellowloc.getBlock().setType(Material.YELLOW_BANNER);
-                    flagCaptured = false;
                 }
             }
         }
@@ -127,6 +127,10 @@ public class CaptureEvents implements Listener {
         if (playerloc.add(0, -1, 0).getBlock().getType().equals(Material.YELLOW_CONCRETE) && TeamConfigCmds.yellow.getEntries().contains(event.getPlayer().getName()) && flagCaptured) {
             Player player = event.getPlayer();
             if (player.hasPotionEffect(PotionEffectType.GLOWING)) {
+                player.sendMessage("§eVous avez amené le drapeau à votre base !");
+                player.removePotionEffect(PotionEffectType.GLOWING);
+                purpleloc.getBlock().setType(Material.PURPLE_BANNER);
+                flagCaptured = false;
                 Bukkit.broadcastMessage("§7*------------------------*");
                 Bukkit.broadcastMessage(" ");
                 Bukkit.broadcastMessage("§e" + player.getName() + " §6a capturé le drapeau !");
@@ -150,13 +154,9 @@ public class CaptureEvents implements Listener {
                         }, 100L);
                     }
                 }
-                    player.sendMessage("§eVous avez amené le drapeau à votre base !");
-                // quand le joueur meurt, le drapeau est drop par terre pendant 30 secondes, si personne le récupère, il est remis à sa place
-                    player.removePotionEffect(PotionEffectType.GLOWING);
-                    purpleloc.getBlock().setType(Material.PURPLE_BANNER);
-                    flagCaptured = false;
-                }
+            }
         }
+        // quand le joueur meurt, le drapeau est drop par terre pendant 30 secondes, si personne le récupère, il est remis à sa place
     }
 
     @EventHandler
